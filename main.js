@@ -73,9 +73,9 @@ const loadProducts = () =>
 const loadTable = () =>
 {
     let html = '';
-    const proudctStorage = getLocalStorage(KEY);
+    const proudctStorage = [getLocalStorage(KEY)];
 
-    console.log( proudctStorage );
+
     if(productsCart.length > 0)
     {
         for(let product of productsCart)
@@ -98,7 +98,7 @@ const loadTable = () =>
         }
 
         bodyProducts.innerHTML = html;
-        setLocalStorage(KEY, productsCart);
+        
     }
 }
 
@@ -114,6 +114,7 @@ const addProduct = (idProduct) =>
         {
             productsCart.push(productFinded);
             loadTable();
+
         }
     }
     else
@@ -121,6 +122,7 @@ const addProduct = (idProduct) =>
         productsCart[productInCartIndex].amount ++;
         loadTable();
     }
+
 }
 
 const sumar = (idProduct) =>
