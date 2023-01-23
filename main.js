@@ -95,6 +95,7 @@ const loadTable = () =>
                 </td>
             </tr>
             `;
+            console.log(setLocalStorage( KEY, product ));
         }
 
         bodyProducts.innerHTML = html;
