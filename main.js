@@ -38,7 +38,7 @@ let products =
 let productsCart = [];
 let divProducts = document.querySelector('#products');
 let bodyProducts = document.querySelector('#body-products');
-const KEY = 'PRODUCT_CAR_KEY';
+const KEY = 'PRODUCT_CART_KEY';
 
 //Functions
 const loadProducts = () =>
@@ -72,10 +72,9 @@ const loadProducts = () =>
 
 const loadTable = () =>
 {
+    let getProductStorage = getLocalStorage( KEY );
     let html = '';
-    const proudctStorage = [getLocalStorage(KEY)];
-
-
+    
     if(productsCart.length > 0)
     {
         for(let product of productsCart)
@@ -95,27 +94,28 @@ const loadTable = () =>
                 </td>
             </tr>
             `;
-            console.log(setLocalStorage( KEY, product ));
+            setLocalStorage(KEY, product)
+            console.log( getProductStorage )
         }
-
+        
         bodyProducts.innerHTML = html;
         
     }
 }
 
+
 const addProduct = (idProduct) =>
 {
     let productInCartIndex = productsCart.findIndex(p => p.id == idProduct);
+    let productFinded =  products.find(p => p.id == idProduct);
 
     if(productInCartIndex === -1)
     {
-        let productFinded =  products.find(p => p.id == idProduct);
 
         if(productFinded !== null && productFinded != '')
         {
             productsCart.push(productFinded);
             loadTable();
-
         }
     }
     else
