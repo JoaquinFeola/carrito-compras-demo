@@ -36,6 +36,7 @@ let products =
 ]
 
 let productsCart = [];
+let productsStorage = [];
 let divProducts = document.querySelector('#products');
 let bodyProducts = document.querySelector('#body-products');
 const KEY = 'PRODUCT_CART_KEY';
@@ -94,8 +95,8 @@ const loadTable = () =>
                 </td>
             </tr>
             `;
-            setLocalStorage(KEY, product)
-            console.log( getProductStorage )
+            setLocalStorage(KEY, productsCart); 
+            console.log( getProductStorage );
         }
         
         bodyProducts.innerHTML = html;
@@ -135,6 +136,8 @@ const restar = (idProduct) =>
 {
     console.log(idProduct);
 }
+
+// Local storage
 
 const setLocalStorage = (key, object) =>
 {
