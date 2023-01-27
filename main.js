@@ -34,6 +34,7 @@ let products =
         img: '',
     }
 ]
+let PRODUCT_STORAGE_ARR_KEY = 'ARR_CART_KEY'
 
 let productsCart = [];
 let productsStorage = [];
@@ -75,7 +76,7 @@ const loadTable = () =>
 {
     let getProductStorage = getLocalStorage( KEY );
     let html = '';
-    
+    let GPS = getLocalStorage( PRODUCT_STORAGE_ARR_KEY );
     if(productsCart.length > 0)
     {
         for(let product of productsCart)
@@ -95,8 +96,7 @@ const loadTable = () =>
                 </td>
             </tr>
             `;
-            setLocalStorage(KEY, productsCart); 
-            console.log( getProductStorage );
+            productsStorage.push( setLocalStorage(KEY, productsCart) );
         }
         
         bodyProducts.innerHTML = html;
