@@ -126,7 +126,7 @@ const addProduct = (idProduct) =>
     }
 
 }
-console.log('2');
+console.log('');
 const sumar = (idProduct) =>
 {
     console.log(idProduct);
