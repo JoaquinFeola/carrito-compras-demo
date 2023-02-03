@@ -284,7 +284,7 @@
             textoBtn: 'Agregar', 
         },
     ];
-
+    let KEY_PRODUCT_STORAGE = 'KEY_PRODUCTS_STORAGE'
     // funciones
 
     // Carga los productos al HTML
@@ -341,7 +341,9 @@
     // carga los productos al carrito
     const loadProductsToCart = () => {
         let innerProductsCart = '';
-        
+        let getItemStorage = setLocalStorage( KEY_PRODUCT_STORAGE, productsCart ) 
+        let setItemStorage = getLocalStorage( KEY_PRODUCT_STORAGE )
+        console.log( localStorage )
         if ( productsCart.length > 0 )
         {
             for ( let product of productsCart )
@@ -421,7 +423,20 @@
         loadProducts();
     };
 
+    // lo guarda en el local storage
+    const setLocalStorage = ( key, object )  => {
+        localStorage.setItem( key, JSON.stringify( object ) )
+    };
 
+    // salva en el local storage
+    const getLocalStorage = ( key ) => {
+        localStorage.getItem( key )
+    };
+
+    // saca del local storage
+    const removeLocalStorage = ( key ) => {
+        localStorage.removeItem( key )
+    };
 
     // listeners
     shoppingCartBtn.addEventListener( 'click', opnProductsCartFrame );
