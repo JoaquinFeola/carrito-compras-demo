@@ -165,15 +165,14 @@
 // loadProducts();
 // loadTable();
 
-
-const myModule = (() => {
-    // Variables HTML
+// Variables HTML
 
     const shoppingCartBtn      = document.querySelector( '#shopping_cart_opn_btn' );
     const divContainerProducts = document.querySelector( '#div_contenedor_de_productos' );
     const productsAmountText   = document.querySelector( '#products_amount_text' );
     const divProducts          = document.querySelector( '#div_products' );
-          
+    const inputNumberValue     = document.querySelector( '.input-number-value' );
+
     // variables
         let productsCart = [];
 
@@ -185,28 +184,32 @@ const myModule = (() => {
             name: 'Frutilla',
             price: 600,
             amount: 1,
-            stock: 100, 
+            stock: 100,
+            textoBtn: 'Agregar', 
         },
         {
             id: 2,
             name: 'Banana',
             price: 500,
             amount: 1,
-            stock: 100, 
+            stock: 100,
+            textoBtn: 'Agregar', 
         },
         {
             id: 3,
             name: 'Maracuyá',
             price: 2400,
             amount: 1,
-            stock: 100, 
+            stock: 100,
+            textoBtn: 'Agregar', 
         },
         {
             id: 4,
             name: 'Uva',
             price: 1400,
             amount: 1,
-            stock: 100, 
+            stock: 100,
+            textoBtn: 'Agregar', 
         },
     ];
 
@@ -223,52 +226,140 @@ const myModule = (() => {
                 <h3 class="card-title text-center mt-2">${ product.name }</h3>
                 <div class="card-body">
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing.</p>
-                    <p class="price-text" >$${ product.price }</p>
+                    <p class="price-text" >$${ product.price}</p>
                     <div class="actions-btns-container">
-                        <button class="btn btn-success" data-id="${product.id}" >+</button>
-                        <button class="btn btn-danger" >-</button>
+                        <button class="btn btn-success" onclick="addProduct(${ product.id })" ><i class="bi bi-cart2"></i> ${ product.textoBtn }</button>
                     </div>
                 </div>
             </div>    
             `
+        };
+        divProducts.innerHTML = innerProducts
+    };
+    // Texto de la cantidad de productos en carrito
+    const cartProductsTextAmount = () => {
+        productsAmountText.textContent = ` ${ productsCart.length }`;
+        if ( document.querySelector( '.bi-cart4' ))
+        {
+            const cart4 = document.querySelector( '.bi-cart4' );
+
+            cart4.classList.remove( 'bi' );
+            cart4.classList.remove( 'bi-cart4' );
+            cart4.classList.add( 'bi-cart-fill' )
+        };
+    }
+
+    // agrega el producto a productsCart
+    const addProduct = (idProduct) => {
+        let findProduct = products.find( p => p.id == idProduct );
+        let findIndexProduct = productsCart.findIndex( p => p.id == findProduct.id );
+        
+        if ( findIndexProduct === -1 ) 
+        {
+            productsCart.push( findProduct )
+            findProduct.textoBtn = 'Agregado'
+            loadProducts()
         }
 
-        divProducts.innerHTML += innerProducts
+        loadProductsToCart();
+        cartProductsTextAmount();
     };
 
+
+    // carga los productos al carrito
+    const loadProductsToCart = () => {
+        let innerProductsCart = '';
+        
+        if ( productsCart.length > 0 )
+        {
+            for ( let product of productsCart )
+            {
+                innerProductsCart += `
+                <div class="card">
+                    <h3 class="card-title text-center mt-2">${ product.name }</h3>
+                    <div class="card-body">
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing.</p>
+                        <div class="cantidad-input-number-container" >
+                            <p>Cantidad</p>
+                            <input type="number" value="${ product.amount }" class="input-number-value text-center" readonly >
+                        </div>
+                        <p class="price-text" >$${ product.price * product.amount }</p>
+                        <div class="actions-btns-container">
+                            <button class="btn btn-success" onclick="btnSuma(${ product.id })" >+</button>
+                            <button class="btn btn-danger " onclick="btnResta(${ product.id })" >-</button>
+                        </div>
+                    </div>
+                </div>   
+            `
+            };
+        };
+        divContainerProducts.innerHTML = innerProductsCart
+
+    }; 
 
     const opnProductsCartFrame = () => {
-        
+        divContainerProducts.classList.toggle( 'show' )
     };
 
-    // listeners
-    document.addEventListener( 'click', ( e ) => {
-        
-        if ( e.target.dataset.id )
+    // Suma el amount del producto haciendo que tenga mas produtos
+    const btnSuma = ( idProduct ) => {
+        let findProduct = products.find( p => p.id == idProduct );
+        let findIndexProduct = productsCart.findIndex( p => p.id == findProduct.id );
+        if ( findIndexProduct !== -1 )
         {
-            let findProduct = products.find( p => p.id == e.target.dataset.id );
-            console.log( findProduct );
-            let findIndexProduct = productsCart.findIndex( p => p.id == findProduct.id );
+            productsCart[ findIndexProduct ].amount++
+         
+        };
 
-            if ( findIndexProduct == -1  )
-            {
-                productsCart.push( findProduct );
-                console.log( productsCart );
-            }
-            else {
-                productsCart[findIndexProduct].amount ++;
-            }
-
+        if ( productsCart[findIndexProduct].amount >= products[ findIndexProduct ].stock )
+        {
+            productsCart[findIndexProduct].amount = products[findIndexProduct].stock
         }
-    } );
-    
+        loadProductsToCart();
+    };
+
+    // saca y resta el amount de los productos hasta sacarlos del productsCart
+    const btnResta = ( idProduct ) => {
+        let findProduct = products.find( p => p.id == idProduct );
+        let findIndexProduct = productsCart.findIndex( p => p.id == findProduct.id );
+
+        if ( productsCart[ findIndexProduct ].amount > 1 )
+        {
+            productsCart[ findIndexProduct ].amount--
+        }
+        else if ( productsCart[ findIndexProduct ].amount == 1 ) 
+        {
+            productsCart.splice( findIndexProduct, 1 );
+        }
+
+        if ( productsCart.includes( findProduct ) )
+        {
+            findProduct.textoBtn = 'Agregado';
+            console.log( productsCart );
+        }
+        else 
+        {
+            findProduct.textoBtn = 'Agregar';
+            console.log( productsCart );
+        }
+
+
+        loadProductsToCart();
+        cartProductsTextAmount();
+        loadProducts();
+    };
+
+
+
+    // listeners
+    shoppingCartBtn.addEventListener( 'click', opnProductsCartFrame );
 
 
 
 
     // calls
     loadProducts()
-})();
+
 
 
 

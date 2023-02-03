@@ -6,6 +6,7 @@
 
 
 
+
 /* 
     -------------------
             CART
@@ -28,14 +29,23 @@
 
 .cart-products-container {
     height: 83vh;
-    outline: 2px solid #000;
-    background-color: #fff;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    background-color: #aaaa;
     border-radius: 5px ;
     width: 19rem;
     overflow-y: scroll ;
+    position: relative;
+
 }
+
+
+
+
 .prod-container {
     position: relative;
+    width: 20rem;
 }
 
 .shop-container {
@@ -57,13 +67,53 @@
 }
 
 /* productos ingresados */
+
+
 .divProducts {
     display: flex;
-    margin: 5px;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: center;
 }
 
 .price-text {
     font-size: 25px;
+}
+
+input[type= number] {
+    width: max-content;
+}
+
+/* scrollbar */
+
+.cart-products-container::-webkit-scrollbar
+{
+    width: 10px;
+    /* background-color: red; */
+}
+.cart-products-container::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    background-color: #a7a;
+    outline: 2px solid #fff;
+
+}
+.cart-products-container::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #dddd;
+}
+
+
+input[ type=number ] {
+    font-weight: bold;
+    width: 150px;
+    margin: 0;
+}
+
+.show {
+    display: flex;
+}
+
+.cart-products-container .card {
+    height: max-content;
 }
