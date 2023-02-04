@@ -165,6 +165,27 @@
 // loadProducts();
 // loadTable();
 
+//  -------------------------------
+//           LOCAL STORAGE
+// --------------------------------
+        // lo guarda en el local storage
+        const setLocalStorage = ( key, object )  => {
+            localStorage.setItem( key, JSON.stringify( object ) );
+        };
+    
+        // salva en el local storage
+        const getLocalStorage = ( key ) => {
+            localStorage.getItem( key )
+        };
+    
+        // saca del local storage
+        const removeLocalStorage = ( key ) => {
+            localStorage.removeItem( key )
+        };
+
+
+//  .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
 // Variables HTML
 
     const shoppingCartBtn      = document.querySelector( '#shopping_cart_opn_btn' );
@@ -310,7 +331,9 @@
     };
     // Texto de la cantidad de productos en carrito
     const cartProductsTextAmount = () => {
-        productsAmountText.textContent = ` ${ productsCart.length }`;
+        
+        productsAmountText.textContent = productsCart.length
+
         if ( document.querySelector( '.bi-cart4' ))
         {
             const cart4 = document.querySelector( '.bi-cart4' );
@@ -320,30 +343,27 @@
             cart4.classList.add( 'bi-cart-fill' )
         };
     }
-
     // agrega el producto a productsCart
     const addProduct = (idProduct) => {
         let findProduct = products.find( p => p.id == idProduct );
         let findIndexProduct = productsCart.findIndex( p => p.id == findProduct.id );
         
+
         if ( findIndexProduct === -1 ) 
         {
             productsCart.push( findProduct )
             findProduct.textoBtn = 'Agregado'
             loadProducts()
         }
-
+        
         loadProductsToCart();
         cartProductsTextAmount();
     };
-
+    
 
     // carga los productos al carrito
     const loadProductsToCart = () => {
         let innerProductsCart = '';
-        let getItemStorage = setLocalStorage( KEY_PRODUCT_STORAGE, productsCart ) 
-        let setItemStorage = getLocalStorage( KEY_PRODUCT_STORAGE )
-        console.log( localStorage )
         if ( productsCart.length > 0 )
         {
             for ( let product of productsCart )
@@ -368,11 +388,17 @@
             };
         };
         divContainerProducts.innerHTML = innerProductsCart
-
     }; 
 
     const opnProductsCartFrame = () => {
-        divContainerProducts.classList.toggle( 'show' )
+        if ( productsCart.length > 0 )
+        {
+            divContainerProducts.classList.toggle( 'show' )
+        }
+        else 
+        {
+            Swal.fire('¡No hay productos en su carrito!')
+        };
     };
 
     // Suma el amount del producto haciendo que tenga mas produtos
@@ -421,21 +447,6 @@
         loadProductsToCart();
         cartProductsTextAmount();
         loadProducts();
-    };
-
-    // lo guarda en el local storage
-    const setLocalStorage = ( key, object )  => {
-        localStorage.setItem( key, JSON.stringify( object ) )
-    };
-
-    // salva en el local storage
-    const getLocalStorage = ( key ) => {
-        localStorage.getItem( key )
-    };
-
-    // saca del local storage
-    const removeLocalStorage = ( key ) => {
-        localStorage.removeItem( key )
     };
 
     // listeners
