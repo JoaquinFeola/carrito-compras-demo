@@ -37,7 +37,6 @@
 
 // // variables carrito 
 
-// const KEY = 'PRODUCT_CART_KEY';
 // let   productsCart    = [],
 //       productsStorage = [];
 
@@ -146,174 +145,169 @@
 
 // // Local storage
 
-// const setLocalStorage = (key, object) =>
-// {
-//     localStorage.setItem(key, JSON.stringify(object));
-// }
 
-// const getLocalStorage = (key) =>
-// {
-//     return localStorage.getItem(key);
-// }
-
-// const removeLocalStorage = (key) =>
-// {
-//     localStorage.removeItem(key);
-// }
 
 // //Calls
 // loadProducts();
 // loadTable();
 
-//  -------------------------------
-//           LOCAL STORAGE
-// --------------------------------
-        // lo guarda en el local storage
-        const setLocalStorage = ( key, object )  => {
-            localStorage.setItem( key, JSON.stringify( object ) );
-        };
-    
-        // salva en el local storage
-        const getLocalStorage = ( key ) => {
-            localStorage.getItem( key )
-        };
-    
-        // saca del local storage
-        const removeLocalStorage = ( key ) => {
-            localStorage.removeItem( key )
-        };
-
-
-//  .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-
 // Variables HTML
 
-    const shoppingCartBtn      = document.querySelector( '#shopping_cart_opn_btn' );
-    const divContainerProducts = document.querySelector( '#div_contenedor_de_productos' );
-    const productsAmountText   = document.querySelector( '#products_amount_text' );
-    const divProducts          = document.querySelector( '#div_products' );
-    const inputNumberValue     = document.querySelector( '.input-number-value' );
+const shoppingCartBtn      = document.querySelector( '#shopping_cart_opn_btn' );
+const divContainerProducts = document.querySelector( '#div_contenedor_de_productos' );
+const productsAmountText   = document.querySelector( '#products_amount_text' );
+const divProducts          = document.querySelector( '#div_products' );
+const inputNumberValue     = document.querySelector( '.input-number-value' );
 
-    // variables
-        let productsCart = [];
+const KEY_STORAGE = 'PRODUCT_CART_KEY';
+
+// variables
+    let productsCart = [];
 
 
-    // listado de productos
-    let products = [
-        {
-            id: 1,
-            name: 'Frutilla',
-            price: 600,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 2,
-            name: 'Banana',
-            price: 500,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 3,
-            name: 'Maracuyá',
-            price: 2400,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 4,
-            name: 'Uva',
-            price: 1223,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 5,
-            name: 'Cereza',
-            price: 400,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 6,
-            name: 'Ciruela',
-            price: 1400,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 7,
-            name: 'Higo',
-            price: 2400,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 8,
-            name: 'Manzana',
-            price: 1000,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 9,
-            name: 'Melocotón',
-            price: 1452,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 10,
-            name: 'Nectarina',
-            price: 122,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 11,
-            name: 'Pera',
-            price: 1400,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 12,
-            name: 'Piña',
-            price: 1900,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-        {
-            id: 13,
-            name: 'Sandía',
-            price: 830,
-            amount: 1,
-            stock: 100,
-            textoBtn: 'Agregar', 
-        },
-    ];
-    let KEY_PRODUCT_STORAGE = 'KEY_PRODUCTS_STORAGE'
-    // funciones
+// listado de productos
+let products = [
+    {
+        id: 1,
+        name: 'Frutilla',
+        price: 600,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 2,
+        name: 'Banana',
+        price: 500,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 3,
+        name: 'Maracuyá',
+        price: 2400,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 4,
+        name: 'Uva',
+        price: 1223,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 5,
+        name: 'Cereza',
+        price: 400,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 6,
+        name: 'Ciruela',
+        price: 1400,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 7,
+        name: 'Higo',
+        price: 2400,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 8,
+        name: 'Manzana',
+        price: 1000,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 9,
+        name: 'Melocotón',
+        price: 1452,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 10,
+        name: 'Nectarina',
+        price: 122,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 11,
+        name: 'Pera',
+        price: 1400,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 12,
+        name: 'Piña',
+        price: 1900,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+    {
+        id: 13,
+        name: 'Sandía',
+        price: 830,
+        amount: 1,
+        stock: 100,
+        textoBtn: 'Agregar', 
+    },
+];
 
-    // Carga los productos al HTML
-    const loadProducts = () => {
-        let innerProducts = ''
+// funciones
 
-        for ( let product of products )
-        {
+// Carga los productos al HTML
+const loadProducts = () => {
+    let innerProducts = ''
+    
+    let productsStorage = getProductsFromLocalStorage(KEY_STORAGE);
+    
+    for ( let product of products )
+    {
+        // if(productsStorage.length > 0)
+        // {
+        //     for(let p of productsStorage)
+        //     {
+        //         if(p.id == product.id)
+        //         {
+        //             product.textoBtn = p.textoBtn;
+        //         }
+
+        //         innerProducts += `
+        //         <div class="card">
+        //             <h3 class="card-title text-center mt-2">${ product.name }</h3>
+        //             <div class="card-body">
+        //                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing.</p>
+        //                 <p class="price-text" >$${ product.price}</p>
+        //                 <div class="actions-btns-container">
+        //                     <button class="btn btn-success" onclick="addProduct(${ product.id })" ><i class="bi bi-cart2"></i> ${ product.textoBtn }</button>
+        //                 </div>
+        //             </div>
+        //         </div>    
+        //         `
+        //     }
+        // }
+        // else
+        // {
             innerProducts += `
             <div class="card">
                 <h3 class="card-title text-center mt-2">${ product.name }</h3>
@@ -321,142 +315,255 @@
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing.</p>
                     <p class="price-text" >$${ product.price}</p>
                     <div class="actions-btns-container">
-                        <button class="btn btn-success" onclick="addProduct(${ product.id })" ><i class="bi bi-cart2"></i> ${ product.textoBtn }</button>
+                        <button class=z|"btn btn-success" onclick="addProduct(${ product.id })" ><i class="bi bi-cart2"></i> ${ product.textoBtn }</button>
                     </div>
                 </div>
             </div>    
             `
-        };
-        divProducts.innerHTML = innerProducts
+        // }
     };
-    // Texto de la cantidad de productos en carrito
-    const cartProductsTextAmount = () => {
-        
-        productsAmountText.textContent = productsCart.length
 
-        if ( document.querySelector( '.bi-cart4' ))
-        {
-            const cart4 = document.querySelector( '.bi-cart4' );
-
-            cart4.classList.remove( 'bi' );
-            cart4.classList.remove( 'bi-cart4' );
-            cart4.classList.add( 'bi-cart-fill' )
-        };
-    }
-    // agrega el producto a productsCart
-    const addProduct = (idProduct) => {
-        let findProduct = products.find( p => p.id == idProduct );
-        let findIndexProduct = productsCart.findIndex( p => p.id == findProduct.id );
-        
-
-        if ( findIndexProduct === -1 ) 
-        {
-            productsCart.push( findProduct )
-            findProduct.textoBtn = 'Agregado'
-            loadProducts()
-        }
-        
-        loadProductsToCart();
-        cartProductsTextAmount();
-    };
+    divProducts.innerHTML = innerProducts
+};
+// Texto de la cantidad de productos en carrito
+const cartProductsTextAmount = () => {
     
+    let productsStorage = getProductsFromLocalStorage(KEY_STORAGE);
 
-    // carga los productos al carrito
-    const loadProductsToCart = () => {
-        let innerProductsCart = '';
-        if ( productsCart.length > 0 )
-        {
-            for ( let product of productsCart )
-            {
-                innerProductsCart += `
-                <div class="card">
-                    <h3 class="card-title text-center mt-2">${ product.name }</h3>
-                    <div class="card-body">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing.</p>
-                        <div class="cantidad-input-number-container" >
-                            <p>Cantidad</p>
-                            <input type="number" value="${ product.amount }" class="input-number-value text-center" readonly >
-                        </div>
-                        <p class="price-text" >$${ product.price * product.amount }</p>
-                        <div class="actions-btns-container">
-                            <button class="btn btn-success" onclick="btnSuma(${ product.id })" >+</button>
-                            <button class="btn btn-danger " onclick="btnResta(${ product.id })" >-</button>
-                        </div>
-                    </div>
-                </div>   
-            `
-            };
-        };
-        divContainerProducts.innerHTML = innerProductsCart
-    }; 
+    if(productsStorage.length > 0)
+    {
+        productsAmountText.textContent = productsStorage.length;
+    }
+    else
+    {
+        productsAmountText.textContent = productsCart.length;
+    }
 
-    const opnProductsCartFrame = () => {
-        if ( productsCart.length > 0 )
-        {
-            divContainerProducts.classList.toggle( 'show' )
-        }
-        else 
-        {
-            Swal.fire('¡No hay productos en su carrito!')
-        };
+    if ( document.querySelector( '.bi-cart4' ))
+    {
+        const cart4 = document.querySelector( '.bi-cart4' );
+
+        cart4.classList.remove( 'bi' );
+        cart4.classList.remove( 'bi-cart4' );
+        cart4.classList.add( 'bi-cart-fill' )
     };
+}
+// agrega el producto a productsCart
+const addProduct = (idProduct) => 
+{   
+    let productStorage = getLocalStorage(KEY_STORAGE);
 
-    // Suma el amount del producto haciendo que tenga mas produtos
-    const btnSuma = ( idProduct ) => {
-        let findProduct = products.find( p => p.id == idProduct );
-        let findIndexProduct = productsCart.findIndex( p => p.id == findProduct.id );
-        if ( findIndexProduct !== -1 )
+    let findProduct = products.find( p => p.id == idProduct );
+    let findIndexProduct = productsCart.findIndex( p => p.id == findProduct.id );
+    
+    if ( findIndexProduct === -1 )
+    {
+        productsCart.push( findProduct );
+        
+        if(!productStorage)
         {
-            productsCart[ findIndexProduct ].amount++
-         
-        };
-
-        if ( productsCart[findIndexProduct].amount >= products[ findIndexProduct ].stock )
-        {
-            productsCart[findIndexProduct].amount = products[findIndexProduct].stock
+            setLocalStorage(KEY_STORAGE, productsCart);
         }
-        loadProductsToCart();
-    };
-
-    // saca y resta el amount de los productos hasta sacarlos del productsCart
-    const btnResta = ( idProduct ) => {
-        let findProduct = products.find( p => p.id == idProduct );
-        let findIndexProduct = productsCart.findIndex( p => p.id == findProduct.id );
-
-        if ( productsCart[ findIndexProduct ].amount > 1 )
+        else
         {
-            productsCart[ findIndexProduct ].amount--
+            setLocalStorage(KEY_STORAGE, productsCart);
         }
-        else if ( productsCart[ findIndexProduct ].amount == 1 ) 
-        {
-            productsCart.splice( findIndexProduct, 1 );
-        }
-
-        if ( productsCart.includes( findProduct ) )
-        {
-            findProduct.textoBtn = 'Agregado';
-            console.log( productsCart );
-        }
-        else 
-        {
-            findProduct.textoBtn = 'Agregar';
-            console.log( productsCart );
-        }
-
-
-        loadProductsToCart();
-        cartProductsTextAmount();
+        
+        findProduct.textoBtn = 'Agregado';
+        
         loadProducts();
     };
+    loadProductsToCart();
+    cartProductsTextAmount();
+};
 
-    // listeners
-    shoppingCartBtn.addEventListener( 'click', opnProductsCartFrame );
+const drawTable = (list) =>
+{
+    let html = '';
+
+    for ( let product of list )
+    {
+        html += `
+        <div class="card">
+            <h3 class="card-title text-center mt-2">${ product.name }</h3>
+            <div class="card-body">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing.</p>
+                <div class="cantidad-input-number-container" >
+                    <p>Cantidad</p>
+                    <input type="number" value="${ product.amount }" class="input-number-value text-center" readonly >
+                </div>
+                <p class="price-text" >$${ product.price * product.amount }</p>
+                <div class="actions-btns-container">
+                    <button class="btn btn-success" onclick="btnSuma(${ product.id })" >+</button>
+                    <button class="btn btn-danger " onclick="btnResta(${ product.id })" >-</button>
+                </div>
+            </div>
+        </div>   
+    `
+    };
+
+    return html;
+}
+
+// carga los productos al carrito
+const loadProductsToCart = () => 
+{
+    let innerProductsCart = '';
+    let getProductStorage = getLocalStorage(KEY_STORAGE);
+
+    if(getProductStorage)
+    {
+        let productsJson = JSON.parse(getProductStorage);
+        productsCart = productsJson;
+        innerProductsCart = drawTable(productsJson);
+    }
+
+    if ( productsCart.length > 0 )
+    {
+        innerProductsCart = drawTable(productsCart);
+    };
 
 
+    divContainerProducts.innerHTML = innerProductsCart
+}; 
+
+const opnProductsCartFrame = () => {
+    
+    let getProductStorage = getLocalStorage(KEY_STORAGE);
+    let productsJson;
+
+    if(getProductStorage)
+    {
+        productsJson = JSON.parse(getProductStorage);
+    }
+    else
+    {
+        productsJson = [];
+    }
+
+    if ( productsCart.length > 0 || productsJson.length > 0)
+    {
+        divContainerProducts.classList.toggle( 'show' );
+    }
+    else
+    {
+        divContainerProducts.classList.remove( 'show' );
+        Swal.fire('¡No hay productos en su carrito!');
+    };
+};
+
+// Suma el amount del producto haciendo que tenga mas produtos
+const btnSuma = ( idProduct ) => 
+{
+    let findProduct = products.find( p => p.id == idProduct );
+    let findIndexProduct = productsCart.findIndex( p => p.id == findProduct.id );
+    
+    let getProductStorage = getLocalStorage( KEY_STORAGE );
+    
+    if ( findIndexProduct !== -1 )
+    {
+        productsCart[ findIndexProduct ].amount++;
+    
+    };
+
+    if ( productsCart[findIndexProduct].amount >= products[ findIndexProduct ].stock )
+    {
+        productsCart[findIndexProduct].amount = products[findIndexProduct].stock
+    }
+
+    if(getProductStorage)
+    {
+        setLocalStorage(KEY_STORAGE, productsCart);
+    }
+
+    loadProductsToCart();
+};
+
+// saca y resta el amount de los productos hasta sacarlos del productsCart
+const btnResta = ( idProduct ) => {
+    let findProduct = products.find( p => p.id == idProduct );
+    let findIndexProduct = productsCart.findIndex( p => p.id == findProduct.id );
+    let getProductsLocalStorage = getProductsFromLocalStorage(KEY_STORAGE);
+
+    if ( productsCart[ findIndexProduct ].amount > 1 )
+    {
+        productsCart[ findIndexProduct ].amount--;
+        removeLocalStorage(KEY_STORAGE);
+    }
+    else if ( productsCart[ findIndexProduct ].amount == 1 ) 
+    {
+        productsCart.splice( findIndexProduct, 1 );
+        removeLocalStorage(KEY_STORAGE);
+    }
+    
+    if ( productsCart.includes( findProduct ) )
+    {
+        findProduct.textoBtn = 'Agregado';
+    }
+    else 
+    {
+        findProduct.textoBtn = 'Agregar';
+    }
 
 
-    // calls
-    loadProducts()
+    loadProductsToCart();
+    cartProductsTextAmount();
+    loadProducts();
+};
+
+const setLocalStorage = (key, object) =>
+{
+    localStorage.setItem(key, JSON.stringify(object));
+}
+
+const getLocalStorage = (key) =>
+{
+    return localStorage.getItem(key);
+}
+
+const removeLocalStorage = (key) =>
+{
+    localStorage.removeItem(key);
+}
+
+const getProductsFromLocalStorage = (key) =>
+{
+    let productsStorage = getLocalStorage(KEY_STORAGE);
+
+    if(productsStorage)
+    {
+        return JSON.parse(productsStorage);
+    }
+
+    return [];
+}
+
+const loadTextButtons = () =>
+{
+    let productsStorage = getProductsFromLocalStorage(KEY_STORAGE);
+
+    if ( productsStorage.length > 0 ) 
+    {
+        for(let product of productsStorage)
+        {
+            product.textoBtn = 'Agregado';
+        }
+
+        removeLocalStorage(KEY_STORAGE);
+        setLocalStorage(KEY_STORAGE, productsStorage);
+    }
+}
+
+
+// listeners
+shoppingCartBtn.addEventListener( 'click', opnProductsCartFrame );
+
+
+// calls
+loadProducts()
+loadProductsToCart();
+cartProductsTextAmount();
+loadTextButtons();
 
 
 
